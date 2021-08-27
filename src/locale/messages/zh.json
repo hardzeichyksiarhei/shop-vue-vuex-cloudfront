@@ -1,6 +1,6 @@
 {
     "app": {
-        "title": "我的店！",
+        "title": "./coder/books",
         "loading": "请等待。"
     },
     "common": {
