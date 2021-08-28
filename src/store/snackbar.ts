@@ -33,8 +33,9 @@ export const snackbarModuleStore: Module<SnackbarState, any> = {
 			state.visible = true;
 		},
 		closeSnackbar(state) {
-			state.visible = false;
 			state.message = '';
+			state.type = null;
+			state.visible = false;
 		},
 	},
 };

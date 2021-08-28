@@ -1,5 +1,5 @@
 <template>
-	<v-snackbar v-model="value" timeout="7000">
+	<v-snackbar :value="value" timeout="7000">
 		<p class="my-0 font-weight-medium" v-html="message"></p>
 
 		<p class="my-0 text-caption font-weight-thin">
@@ -7,7 +7,7 @@
 		</p>
 
 		<template v-slot:action="{ attrs }">
-			<v-btn color="pink" text v-bind="attrs" @click="value = false">
+			<v-btn color="pink" text v-bind="attrs" @click="close">
 				{{ $t('common.close') }}
 			</v-btn>
 		</template>
@@ -23,6 +23,12 @@ export default Vue.extend({
 		value: {
 			type: Boolean,
 			required: true,
+		},
+	},
+
+	methods: {
+		close() {
+			this.$store.commit('snackbar/closeSnackbar');
 		},
 	},
 });
