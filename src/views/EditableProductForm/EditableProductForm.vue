@@ -108,11 +108,14 @@ export default Vue.extend({
 			this.errorMessage = message.toString();
 		},
 		async handleProductSubmit(values: Product) {
-			console.info(values);
 			this.isFetching = true;
 
 			try {
-				await productApi.saveProduct(values);
+				if (!this.product.id) {
+					await productApi.createProduct(values);
+				} else {
+					await productApi.updateProduct(this.product.id, values);
+				}
 
 				this.$router.push('/admin/products');
 			} catch (e) {
