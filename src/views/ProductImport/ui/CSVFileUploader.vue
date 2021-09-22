@@ -62,10 +62,11 @@ const fetchPresignedS3Url = (url: string, fileName: string) => {
 const uploadFileBy = async (url: string, file: File) => {
 	const destUrl = await fetchPresignedS3Url(url, file.name);
 
-	console.info('Uploading to: ', destUrl.data);
+	const signedUrl = destUrl.data.signedUrl;
+	console.info('Uploading to: ', signedUrl);
 
 	// save
-	const result = await fetch(destUrl.data, {
+	const result = await fetch(signedUrl, {
 		method: 'PUT',
 		body: file,
 	});
