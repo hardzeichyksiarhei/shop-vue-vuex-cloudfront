@@ -49,13 +49,24 @@ import Vue from 'vue';
 
 import axios from 'axios';
 
+interface AxiosHeaders {
+	Authorization?: string;
+}
+
 const fetchPresignedS3Url = (url: string, fileName: string) => {
+	const authorizationToken = localStorage.getItem('authorization_token');
+	const headers: AxiosHeaders = {};
+	if (authorizationToken) {
+		headers.Authorization = `Basic ${authorizationToken}`;
+	}
+
 	return axios({
 		method: 'GET',
 		url,
 		params: {
 			name: encodeURIComponent(fileName),
 		},
+		headers,
 	});
 };
 

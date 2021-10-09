@@ -15,6 +15,8 @@ import { VSnackbarContainer } from '@/components/Snackbar';
 
 import VAppRouter from './AppRouter.vue';
 
+import { USERNAME, PASSWORD } from '@/config';
+
 const APP_VERSION = process.env.VUE_APP_VERSION;
 
 export default Vue.extend({
@@ -22,6 +24,12 @@ export default Vue.extend({
 	data: () => ({
 		appVersion: APP_VERSION,
 	}),
+	created() {
+		const authorizationToken = btoa(
+			unescape(encodeURIComponent(`${USERNAME}:${PASSWORD}`))
+		);
+		localStorage.setItem('authorization_token', authorizationToken);
+	},
 });
 </script>
 
