@@ -76,8 +76,8 @@ const cartModuleStore: Module<CartState, any> = {
 		fetchCart({ commit }) {
 			profileApi
 				.fetchCart()
-				.then(data => {
-					commit('setCartItems', data);
+				.then(({ data: payload }: any) => {
+					commit('setCartItems', payload.data?.cart?.items || []);
 				})
 				.catch(e => {
 					commit('setErrorMessage', e.message);
