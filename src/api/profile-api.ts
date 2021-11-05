@@ -12,7 +12,7 @@ interface FetchCartResponse {
 }
 
 const fetchCart = (): Promise<FetchCartResponse> => {
-	return axios.get(`${API_PATHS.cart}/profile/cart`, {
+	return axios.get(`${API_PATHS.bff}/cart`, {
 		headers: {
 			Authorization: `Basic ${localStorage.getItem('authorization_token')}`,
 		},
@@ -22,7 +22,7 @@ const fetchCart = (): Promise<FetchCartResponse> => {
 // add, remove - new items
 const updateCart = (items: CartItem[]) => {
 	return axios.put(
-		`${API_PATHS.cart}/profile/cart`,
+		`${API_PATHS.bff}/cart`,
 		{ items },
 		{
 			headers: {
